@@ -1,0 +1,63 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: copperplate;
+    background-color: navy;
+
+}
+
+#timer {
+    border: 3vmin solid white;
+    width: 10vmin;
+    border-radius: 50%;;
+    border-color: orange;
+
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(4, 35vmin);
+    grid-template-rows: repeat(3, 20vmin);
+    border-radius: 5vmin;
+    margin-top: 20px;
+    
+}
+
+#board > div {
+    border: 0.6vmin solid black;
+    background-color: orange;
+    border-radius: 5vmin;
+}
+
+#board > div:hover {
+    transform: scale(0.9);
+    cursor: pointer;
+    
+}
+
+header {
+    font-size: 10vmin;
+    color: white;
+}
+
+h1 {
+    color: white;
+}
+
+button {
+    height: 40px;
+    margin: 25px;
+    border-radius: 25px;
+}
+
+button:hover {
+    color: blue;
+    background-color: orange;
+}
