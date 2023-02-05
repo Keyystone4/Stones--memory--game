@@ -37,8 +37,17 @@ body {
 }
 
 #board > div:hover {
-    transform: scale(0.9);
     cursor: pointer;
+    
+}
+
+#board > div:active {
+    transform: scale(0.9);
+
+}
+
+.back {
+    background-color: white;
     
 }
 
