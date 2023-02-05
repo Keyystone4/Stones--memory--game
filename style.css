@@ -43,10 +43,11 @@ body {
 
 #board > div:active {
     transform: scale(0.9);
+    transition: transform .3s;
 
 }
 
-.back {
+#back {
     background-color: white;
     
 }
