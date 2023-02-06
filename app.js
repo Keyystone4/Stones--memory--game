@@ -1,38 +1,64 @@
 // 1) Define required constants//
 const IMAGES = {
-   s1: {img: "https://i.imgur.com/AP5BYMO.png"}, //steelers
-   e1: {img: "https://i.imgur.com/m9pEfn3.png"}, //eagles
-   c1: {img: "https://i.imgur.com/TqDcQki.png"}, //chiefs
-   b1: {img: "https://i.imgur.com/ryP7Cst.png"}, //bengals
-   p1: {img: "https://i.imgur.com/QGCQxgJ.png"}, //packers
-   l1: {img: "https://i.imgur.com/wkXTDjI.png"}, //saints
+   s1: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Pittsburgh_Steelers_logo.svg/392px-Pittsburgh_Steelers_logo.svg.png"}, //steelers
+   e1: {img: "https://i.pinimg.com/originals/e1/69/08/e169088e82bacaa742db4b2a9b35691b.png"}, //eagles
+   c1: {img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVMxkvPOl0fzuvhOFtBLbnJME8f1iy1PzWCCcn49qs&s"}, //chiefs
+   b1: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Cincinnati_Bengals_logo.svg/2560px-Cincinnati_Bengals_logo.svg.png"}, //bengals
+   p1: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Green_Bay_Packers_logo.svg/2560px-Green_Bay_Packers_logo.svg.png"}, //packers
+   l1: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/New_Orleans_Saints_logo.svg/630px-New_Orleans_Saints_logo.svg.png"}, //saints
 
-    s2: {img: "https://i.imgur.com/AP5BYMO.pn"}, //steelers
-    e2: {img: "https://i.imgur.com/m9pEfn3.pn"}, //eagles 
-    c2: {img: "https://i.imgur.com/TqDcQki.pn"}, //chiefs 
-    b2: {img: "https://i.imgur.com/ryP7Cst.pn"}, //bengals 
-    p2: {img: "https://i.imgur.com/QGCQxgJ.pn"}, //packers 
-    l2: {img: "https://i.imgur.com/wkXTDjI.pn"} //saints 
+    s2: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Pittsburgh_Steelers_logo.svg/392px-Pittsburgh_Steelers_logo.svg.png"}, //steelers
+    e2: {img: "https://i.pinimg.com/originals/e1/69/08/e169088e82bacaa742db4b2a9b35691b.png"}, //eagles 
+    c2: {img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVMxkvPOl0fzuvhOFtBLbnJME8f1iy1PzWCCcn49qs&s"}, //chiefs 
+    b2: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Cincinnati_Bengals_logo.svg/2560px-Cincinnati_Bengals_logo.svg.png"}, //bengals 
+    p2: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Green_Bay_Packers_logo.svg/2560px-Green_Bay_Packers_logo.svg.png"}, //packers 
+    l2: {img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/New_Orleans_Saints_logo.svg/630px-New_Orleans_Saints_logo.svg.png"} //saints 
 };
 
 // 2) ---- State variables ----
 let board; // array of 4 column arrays
-let matches; // 
+let matches; // s1 = s2 , s1 != e2
 let winner; // player has selected all matching images
 
 
 
 // 3) ---- Cached elements ---
-const messageEl = document.getElementById('h1');
+const messageEl = document.querySelector('h1');
 const timerEl = document.getElementById('timer');
 const squareEl = document.getElementById('board');
-const squareFront = document.getElementById('div#front')
-const restartBtn = document.getElementById('button');
+const squareFront = document.getElementById('div .front')
+const restartBtn = document.querySelector('button');
+const steelers1 = document.getElementById('steelers1');
+const steelers2 = document.getElementById('steelers2');
+const eagles1 = document.getElementById('eagles1');
+const eagles2 = document.getElementById('eagles2');
+const chiefs1 = document.getElementById('chiefs1');
+const chiefs2 = document.getElementById('chiefs2');
+const bengals1 = document.getElementById('bengals1');
+const bengals2 = document.getElementById('bengals2');
+const packers1 = document.getElementById('packers1');
+const packers2 = document.getElementById('packers2');
+const saints1 = document.getElementById('saints1');
+const saints2 = document.getElementById('saints2');
+//console.log(steelers1);
 
 // 4) ---- Event listeners ---
 squareEl.addEventListener('click', handleFlip);
-timerEl.document.addEventListener('click', handleCountdown);
-restartBtn = document.addEventListener('click', initialize, handleShuffle);
+timerEl.addEventListener('click', handleCountdown);
+restartBtn.addEventListener('click', handleShuffle);
+messageEl.addEventListener('click', handleMessage);
+steelers1.addEventListener('click', handleClickS1);
+steelers2.addEventListener('click', handleClickS2);
+eagles1.addEventListener('click', handleClickE1);
+eagles2.addEventListener('click', handleClickE2);
+chiefs1.addEventListener('click', handleClickC1);
+chiefs2.addEventListener('click', handleClickC2);
+bengals1.addEventListener('click', handleClickB1);
+bengals2.addEventListener('click', handleClickB2);
+packers1.addEventListener('click', handleClickP1);
+packers2.addEventListener('click', handleClickP2);
+saints1.addEventListener('click', handleClickL1);
+saints2.addEventListener('click', handleClickL2);
 
 // 5) ---- functions ----
 initialize();
@@ -41,7 +67,7 @@ function initialize() {
     board = [];
     matches = {
         s1: 's2',
-        e1: 's2',
+        e1: 'e2',
         c1: 'c2',
         b1: 'b2',
         p1: 'p2',
@@ -61,6 +87,65 @@ function handleCountdown() {
 
 function handleShuffle() {
 
+};
+
+function handleMessage() {
+
+};
+
+function handleClickS1(evt) {
+    //console.log(evt.target.src);
+    evt.target.src = IMAGES.s1.img
+    if ( evt.target.src === '') {
+    console.log('true');
+    }
+
+    //console.log(steelers1.src);
+};
+
+function handleClickS2(evt) {
+    evt.target.src = IMAGES.s2.img
+    
+};
+
+function handleClickE1(evt) {
+    evt.target.src = IMAGES.e1.img
+};
+
+function handleClickE2(evt) {
+    evt.target.src = IMAGES.e2.img
+};
+
+function handleClickC1(evt) {
+    evt.target.src = IMAGES.c1.img
+};
+
+function handleClickC2(evt) {
+    evt.target.src = IMAGES.c2.img
+};
+
+function handleClickB1(evt) {
+    evt.target.src = IMAGES.b1.img
+};
+
+function handleClickB2(evt) {
+    evt.target.src = IMAGES.b2.img
+};
+
+function handleClickP1(evt) {
+    evt.target.src = IMAGES.p1.img
+};
+
+function handleClickP2(evt) {
+    evt.target.src = IMAGES.p2.img
+};
+
+function handleClickL1(evt) {
+    evt.target.src = IMAGES.l1.img
+};
+
+function handleClickL2(evt) {
+    evt.target.src = IMAGES.l2.img
 };
 
 // 6) ----- Visualize all state in the DOM ----

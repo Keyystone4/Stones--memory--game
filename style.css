@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: copperplate;
-    background-color: navy;
+    background-color: darkgray;
 
 }
 
@@ -25,15 +25,14 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 35vmin);
     grid-template-rows: repeat(3, 20vmin);
-    border-radius: 5vmin;
+    
     margin-top: 20px;
     
 }
 
 #board > div {
     border: 0.6vmin solid black;
-    background-color: orange;
-    border-radius: 5vmin;
+    background-color: green;
 }
 
 #board > div:hover {
@@ -47,8 +46,10 @@ body {
 
 }
 
-#back {
-    background-color: white;
+.front{
+    background-color: green;
+    text-align: center;
+    margin-top: 15px;
     
 }
 
@@ -70,4 +71,9 @@ button {
 button:hover {
     color: blue;
     background-color: orange;
+}
+
+img {
+    height: 75px;
+    width: 100px;
 }
