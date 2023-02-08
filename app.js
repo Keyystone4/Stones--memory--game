@@ -18,10 +18,7 @@ const IMAGES = [
 
 
 // 2) ---- State variables ----
-
 let winner; // player has selected all matching images
-let clickedCell;
-let rememberClick;
 let timer = 60;
 
 // 3) ---- Cached elements ---
@@ -43,14 +40,16 @@ function initialize() {
     
     teams.forEach((team, i) => {
     team.setAttribute('name', IMAGES[i].name);
-    
+    //team.firstChild.nextSibling.setAttribute('src', IMAGES[i].src);
+    console.log(team.firstChild.nextSibling);
+    team.firstChild.nextSibling.setAttribute('name', IMAGES[i].name);
 })
     // for(let i = 0; i < IMAGES.length; i++) {    
     // };
         
     
 
-  winner = "";
+  winner = '';
   render();
 }
 
@@ -77,8 +76,12 @@ function handleCountdown() {
    
 
 function handleClick(evt) {
-    evt.target.src = "https://i.pinimg.com/originals/e1/69/08/e169088e82bacaa742db4b2a9b35691b.png"
-    console.log(evt.target);
+    
+  let foundObjectByName = IMAGES.find((IMAGE) => IMAGE.name === evt.target.name);
+  evt.target.src = foundObjectByName.src;
+
+
+    
 };
 
 // if (lastClicked != '' &&
@@ -107,10 +110,13 @@ function render() {
 
 
   function renderMessage() {
-    if (winner === winner) {
+    if (winner === null) {
       messageEl.innerHTML = "Try Again !";
     } else if (winner) {
       messageEl.innerHTML = "Congratulations, You Win!!!";
+    } else {
+      //game is in play
+      messageEl.innerHTML = "Find the matches 👀";
     }
   }
 
@@ -118,3 +124,5 @@ function render() {
     restartBtn.style.visibility = winner ? "visible" : "hidden";
   }
 }
+
+// winner = if all cards are matched .
