@@ -15,7 +15,7 @@ const IMAGES = [
   {src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/New_Orleans_Saints_logo.svg/630px-New_Orleans_Saints_logo.svg.png", name: "saints"}
 ];
 
-let logos = [];
+
 
 // 2) ---- State variables ----
 
