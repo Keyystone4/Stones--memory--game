@@ -20,6 +20,7 @@ const IMAGES = [
 // 2) ---- State variables ----
 let winner; // player has selected all matching images
 let timer = 60;
+let lastClicked;
 
 // 3) ---- Cached elements ---
 const messageEl = document.querySelector("h1");
@@ -40,22 +41,15 @@ function initialize() {
     
     teams.forEach((team, i) => {
     team.setAttribute('name', IMAGES[i].name);
-    //team.firstChild.nextSibling.setAttribute('src', IMAGES[i].src);
-    console.log(team.firstChild.nextSibling);
     team.firstChild.nextSibling.setAttribute('name', IMAGES[i].name);
 })
-    // for(let i = 0; i < IMAGES.length; i++) {    
-    // };
-        
     
-
   winner = '';
   render();
 }
 
 function handleCountdown() {
     timer--;
-    //document.getElementById('timer')
     timerEl.innerHTML = String (timer);
     if (timer > 0) {
         setTimeout(handleCountdown, 1000);
@@ -63,25 +57,18 @@ function handleCountdown() {
 };
 
 
-// function handleShuffle() {
-    
+// const randomize = () => {
+//     IMAGES.sort((a, b) => 0.5 - Math.random());
+//      return; IMAGES
 // };
 
 
-// const randomize = () => {
-//     const cardData = handleShuffle();
-//     cardData.sort(() => Math.random() - 0.5);
-//      console.log(cardData);
-//}
-   
-
-function handleClick(evt) {
+   function handleClick(evt) {
     
-  let foundObjectByName = IMAGES.find((IMAGE) => IMAGE.name === evt.target.name);
+  let foundObjectByName = IMAGES.find((IMAGE) => 
+  IMAGE.name === evt.target.name);
   evt.target.src = foundObjectByName.src;
 
-
-    
 };
 
 // if (lastClicked != '' &&
@@ -90,7 +77,7 @@ function handleClick(evt) {
 //       console.log('match');
 //     } else {
 //       console.log('incorrect');
-    //}
+//     }
 
 
 

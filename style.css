@@ -20,6 +20,7 @@ body {
     border-color: green;
     color: white;
     background-color: green;
+    text-align: center;
 
 }
 
@@ -71,8 +72,8 @@ button {
 }
 
 button:hover {
-    color: blue;
-    background-color: orange;
+    color: white;
+    background-color: green;
 }
 
 img {
