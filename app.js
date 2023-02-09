@@ -20,7 +20,8 @@ const IMAGES = [
 // 2) ---- State variables ----
 let winner; // player has selected all matching images
 let timer = 60;
-let lastClicked;
+let firstTeam;
+let secondTeam;
 
 // 3) ---- Cached elements ---
 const messageEl = document.querySelector("h1");
@@ -45,6 +46,8 @@ function initialize() {
 })
     
   winner = '';
+  firstCell = null;
+  secondCell = null;
   render();
 }
 
@@ -71,15 +74,29 @@ function handleCountdown() {
 
 };
 
-// if (lastClicked != '' &&
-//     lastClicked.parentElement.getAttribute('name') === clickedCard.parentElement.getAttribute('name') &&
-//     lastClicked.parentElement.getAttribute('number') != clickedCard.parentElement.getAttribute('number')) {
-//       console.log('match');
-//     } else {
-//       console.log('incorrect');
-//     }
+function getMatches(evt, handleClick) {
+  // firstCell = null;
+  // secondCell = null;
+  // let lastClicked = firstCell.parentElement.getAttribute('name');
+  // let clickedCard = secondCell.parentElement.getAttribute('name');
+  // console.log(lastClicked);
+
+//   if(lastClicked === clickedCard) {
+//     console.log('match');
+//     match++;
+// } else {
+//     console.log('incorrect');
+//     playerWrong--;
+//     firstCell.parentElement.removeEventListener('click', handleClick);
+//     secondCell.parentElement.removeEventListener('click', handleClick);
+// }
 
 
+};
+
+function getWinner() {
+
+};
 
 // 6) ----- Visualize all state in the DOM ----
 function render() {
