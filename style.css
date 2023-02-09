@@ -14,9 +14,12 @@ body {
 }
 
 #timer {
+    display: flex;
+    flex-direction: row;
     border: 3vmin solid white;
-    width: 10vmin;
-    border-radius: 50%;;
+    height: 10vmin;
+    width: 13vmin;
+    border-radius: 50%;
     border-color: green;
     color: white;
     background-color: green;

@@ -24,6 +24,7 @@ let firstCell = null;
 let secondCell = null;
 let counter = 0;
 let cardBack = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AmFBfield.svg/1200px-AmFBfield.svg.png"
+let matchesFound = 0;
 
 // 3) ---- Cached elements ---
 const messageEl = document.querySelector("h1");
@@ -56,6 +57,8 @@ function handleCountdown() {
     timerEl.innerHTML = String (timer);
     if (timer > 0) {
         setTimeout(handleCountdown, 1000);
+    } else {
+      messageEl.innerHTML = " Time's Up , GAME OVER !"
     }
 };
 
@@ -70,20 +73,27 @@ function handleCountdown() {
   if (evt.target.getAttribute('src') === cardBack) {let foundObjectByName = IMAGES.find((IMAGE) => 
   IMAGE.name === evt.target.name);
   evt.target.src = foundObjectByName.src;
-  counter++;
-    if (counter === 1) {
-      firstCell = evt.target;
-  } else if ( counter > 1 && firstCell !== evt.target ) 
-   counter = 0;
+  if (counter === 0) {
+    firstCell = evt.target;
+    counter++;
+  } else { 
+    counter = 0;
     getMatches(firstCell, evt.target);
-  
+  }
   }
 };
 
 
 function getMatches(firstClicked, secondClicked) {
+  console.log(firstClicked, secondClicked);
   if (firstClicked.getAttribute('name') === secondClicked.getAttribute('name')) {
     console.log('match');
+    matchesFound++;
+    console.log(matchesFound);
+    if (matchesFound === 6) {
+      messageEl.innerHTML = "Congratulations, You Win!!";
+    }
+    
   } else { 
     
     console.log('no match');
@@ -92,10 +102,6 @@ function getMatches(firstClicked, secondClicked) {
   }
 };
 
-
-function getWinner() {
-
-};
 
 // 6) ----- Visualize all state in the DOM ----
 function render() {
@@ -115,8 +121,6 @@ function render() {
   function renderMessage() {
     if (winner === null) {
       messageEl.innerHTML = "Try Again !";
-    } else if (winner) {
-      messageEl.innerHTML = "Congratulations, You Win!!!";
     } else {
       //game is in play
       messageEl.innerHTML = "Find the matches 👀";
@@ -124,8 +128,6 @@ function render() {
   }
 
   function renderControls() {
-    restartBtn.style.visibility = winner ? "visible" : "hidden";
+    restartBtn.style.visibility = "visible";
   }
 }
-
-// winner = if all cards are matched .
