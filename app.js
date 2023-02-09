@@ -20,6 +20,7 @@ const IMAGES = [
 // 2) ---- State variables ----
 let winner; // player has selected all matching images
 let timer = 60;
+let stopTimer = null;
 let firstCell = null;
 let secondCell = null;
 let counter = 0;
@@ -30,7 +31,7 @@ let matchesFound = 0;
 const messageEl = document.querySelector("h1");
 const timerEl = document.getElementById("timer");
 const boardEl = document.getElementById("board");
-const restartBtn = document.querySelector("button");
+const restartBtn = document.querySelector("#restart");
 const teams = document.querySelectorAll('.front');
 
 // 4) ---- Event listeners ---
@@ -42,9 +43,13 @@ boardEl.addEventListener('click', handleClick);
 initialize();
 
 function initialize() {
-    
+  timer = 60;
+  if(timer) clearInterval(stopTimer);
+  
+  shuffle();
     teams.forEach((team, i) => {
     team.setAttribute('name', IMAGES[i].name);
+    team.firstElementChild.setAttribute('src', cardBack);
     team.firstChild.nextSibling.setAttribute('name', IMAGES[i].name);
 })
     
@@ -56,20 +61,27 @@ function handleCountdown() {
     timer--;
     timerEl.innerHTML = String (timer);
     if (timer > 0) {
-        setTimeout(handleCountdown, 1000);
+      stopTimer = setTimeout(handleCountdown, 1000);
     } else {
       messageEl.innerHTML = " Time's Up , GAME OVER !"
     }
 };
 
-
-// const randomize = () => {
-//     IMAGES.sort((a, b) => 0.5 - Math.random());
-//      return; IMAGES
-// };
+function shuffle() {
+  let currentIndex = IMAGES.length, temporaryValue, randomIndex;
+  while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = IMAGES[currentIndex];
+      IMAGES[currentIndex] = IMAGES[randomIndex];
+      IMAGES[randomIndex] = temporaryValue;
+  }
+  return IMAGES;
+}
 
 
    function handleClick(evt) {
+    if(!stopTimer) handleCountdown();
   if (evt.target.getAttribute('src') === cardBack) {let foundObjectByName = IMAGES.find((IMAGE) => 
   IMAGE.name === evt.target.name);
   evt.target.src = foundObjectByName.src;
@@ -85,18 +97,15 @@ function handleCountdown() {
 
 
 function getMatches(firstClicked, secondClicked) {
-  console.log(firstClicked, secondClicked);
+  
   if (firstClicked.getAttribute('name') === secondClicked.getAttribute('name')) {
-    console.log('match');
     matchesFound++;
-    console.log(matchesFound);
+    
     if (matchesFound === 6) {
+      clearInterval(stopTimer);
       messageEl.innerHTML = "Congratulations, You Win!!";
-    }
-    
-  } else { 
-    
-    console.log('no match');
+   } 
+} else { 
     setTimeout((function () {firstClicked.setAttribute('src', cardBack);
     secondClicked.setAttribute('src', cardBack)}), 1500)
   }
@@ -106,7 +115,6 @@ function getMatches(firstClicked, secondClicked) {
 // 6) ----- Visualize all state in the DOM ----
 function render() {
   renderTimer();
-  renderBoard();
   renderMessage();
   //hide/show restart button
   renderControls();
@@ -115,11 +123,8 @@ function render() {
     timerEl.style.visibility = "visible";
   }
 
-  function renderBoard() {}
-
-
-  function renderMessage() {
-    if (winner === null) {
+function renderMessage() {
+    if (winner) {
       messageEl.innerHTML = "Try Again !";
     } else {
       //game is in play
