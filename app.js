@@ -20,8 +20,10 @@ const IMAGES = [
 // 2) ---- State variables ----
 let winner; // player has selected all matching images
 let timer = 60;
-let firstTeam;
-let secondTeam;
+let firstCell = null;
+let secondCell = null;
+let counter = 0;
+let cardBack = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AmFBfield.svg/1200px-AmFBfield.svg.png"
 
 // 3) ---- Cached elements ---
 const messageEl = document.querySelector("h1");
@@ -46,8 +48,6 @@ function initialize() {
 })
     
   winner = '';
-  firstCell = null;
-  secondCell = null;
   render();
 }
 
@@ -67,32 +67,31 @@ function handleCountdown() {
 
 
    function handleClick(evt) {
-    
-  let foundObjectByName = IMAGES.find((IMAGE) => 
+  if (evt.target.getAttribute('src') === cardBack) {let foundObjectByName = IMAGES.find((IMAGE) => 
   IMAGE.name === evt.target.name);
   evt.target.src = foundObjectByName.src;
-
+  counter++;
+    if (counter === 1) {
+      firstCell = evt.target;
+  } else if ( counter > 1 && firstCell !== evt.target ) 
+   counter = 0;
+    getMatches(firstCell, evt.target);
+  
+  }
 };
 
-function getMatches(evt, handleClick) {
-  // firstCell = null;
-  // secondCell = null;
-  // let lastClicked = firstCell.parentElement.getAttribute('name');
-  // let clickedCard = secondCell.parentElement.getAttribute('name');
-  // console.log(lastClicked);
 
-//   if(lastClicked === clickedCard) {
-//     console.log('match');
-//     match++;
-// } else {
-//     console.log('incorrect');
-//     playerWrong--;
-//     firstCell.parentElement.removeEventListener('click', handleClick);
-//     secondCell.parentElement.removeEventListener('click', handleClick);
-// }
-
-
+function getMatches(firstClicked, secondClicked) {
+  if (firstClicked.getAttribute('name') === secondClicked.getAttribute('name')) {
+    console.log('match');
+  } else { 
+    
+    console.log('no match');
+    setTimeout((function () {firstClicked.setAttribute('src', cardBack);
+    secondClicked.setAttribute('src', cardBack)}), 1500)
+  }
 };
+
 
 function getWinner() {
 
