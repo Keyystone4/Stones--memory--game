@@ -17,8 +17,7 @@ body {
     display: flex;
     flex-direction: row;
     border: 3vmin solid white;
-    height: 10vmin;
-    width: 13vmin;
+    width: 10vmin;
     border-radius: 50%;
     border-color: green;
     color: white;
@@ -80,6 +79,6 @@ button:hover {
 }
 
 img {
-    height: 75px;
-    width: 120px;
+    height: 115px;
+    width: 190px;
 }

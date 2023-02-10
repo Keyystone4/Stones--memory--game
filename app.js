@@ -19,7 +19,7 @@ const IMAGES = [
 
 // 2) ---- State variables ----
 let winner; // player has selected all matching images
-let timer = 60;
+let timer = 45;
 let stopTimer = null;
 let firstCell = null;
 let secondCell = null;
@@ -43,7 +43,7 @@ boardEl.addEventListener('click', handleClick);
 initialize();
 
 function initialize() {
-  timer = 60;
+  timer = 45;
   if(timer) clearInterval(stopTimer);
   
   shuffle();
