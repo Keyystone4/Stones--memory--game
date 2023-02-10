@@ -18,7 +18,6 @@ const IMAGES = [
 
 
 // 2) ---- State variables ----
-let winner; // player has selected all matching images
 let timer = 45;
 let stopTimer = null;
 let firstCell = null;
@@ -80,15 +79,15 @@ function shuffle() {
 }
 
 
-   function handleClick(evt) {
-    if(!stopTimer) handleCountdown();
-  if (evt.target.getAttribute('src') === cardBack) {let foundObjectByName = IMAGES.find((IMAGE) => 
-  IMAGE.name === evt.target.name);
-  evt.target.src = foundObjectByName.src;
+function handleClick(evt) {
+  if(!stopTimer) handleCountdown();
+    if (evt.target.getAttribute('src') === cardBack) {let foundObjectByName = IMAGES.find((IMAGE) => 
+      IMAGE.name === evt.target.name);
+      evt.target.src = foundObjectByName.src;
   if (counter === 0) {
-    firstCell = evt.target;
-    counter++;
-  } else { 
+      firstCell = evt.target;
+      counter++;
+} else { 
     counter = 0;
     getMatches(firstCell, evt.target);
   }
@@ -127,7 +126,6 @@ function renderMessage() {
     if (winner) {
       messageEl.innerHTML = "Try Again !";
     } else {
-      //game is in play
       messageEl.innerHTML = "Find the matches 👀";
     }
   }
